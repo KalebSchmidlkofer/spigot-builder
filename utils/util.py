@@ -15,10 +15,3 @@ def get_vanilla_version():
   return versions
 
 
-
-
-print(get_paper_versions())
-print(get_vanilla_version())
-
-
-
