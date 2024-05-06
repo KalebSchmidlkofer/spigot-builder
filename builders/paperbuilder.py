@@ -1,6 +1,10 @@
 import utils 
 import asyncio
 
-versions = utils.loadPlugin()
-def build(build_path, version):
-  pass
+def build(build_path: str, version = None):
+  if version == None:
+    version=utils.loadPlugin()
+  else:
+    pass
+
+  

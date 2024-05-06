@@ -1,4 +1,11 @@
 import requests
+from loguru import logger
+
+
+def load_logging():
+  logger.remove()
+  logger.add("out.log", backtrace=True, diagnose=True)
+
 
 def get_paper_versions():
   vapi='https://api.papermc.io/v2/projects/paper'

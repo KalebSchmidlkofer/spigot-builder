@@ -1,28 +1,33 @@
 import subprocess
 import utils
+from loguru import logger
+
 
 def _version_to_tuple(version_str):
   try:
     return tuple(map(int, version_str.split('.')))
   except ValueError as e:
-    print(f'Failed to parse: {version_str}')
-    print(f'Use Verbose to view more info')
-    return 
+    logger.warning(f'Failed to parse: {version_str}')
+    logger.info(f'Use Verbose to view more info')
+    pass
 
 def _tuple_to_version(version_tuple):
   return '.'.join(map(str, version_tuple))
 
 
 
-def build(build_path: str, version:list = None):
+def build(build_path: str, version = None):
   
-  if not version:
+  if version == None:
     version=utils.get_paper_versions()
     VERSIONS = [_version_to_tuple(versions) for versions in version]
   else:
+
     VERSIONS = [_version_to_tuple(version)]
   
   for x in VERSIONS:
+    if x == None:
+      pass
     version = _tuple_to_version(x)
     print(f'Building Version: {version}')
     if x > (1,17,1):
