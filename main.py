@@ -17,7 +17,7 @@ build_path=path.join('.', 'release')
 @app.command('spigot')
 def build_spigot(
   version=None,
-  trace: Annotated[bool, typer.Option(help='Enable trace messages')] = False
+  trace: Annotated[bool, typer.Option("--trace", "-t", help='Enable trace messages')] = False
 ):
   builders.spigotbuilder.build(build_path, version=version)
 
@@ -26,17 +26,20 @@ def build_spigot(
 @app.command('paper')
 def build_paper(
   version=None,
-  trace: Annotated[bool, typer.Option(help='Enable trace messages')] = False
+  trace: Annotated[bool, typer.Option("--trace", "-t", help='Enable trace messages')] = False
   ):
   builders.paperbuilder.build(build_path, version=version)
 
 @app.command('test')
 def test(
-  trace: Annotated[bool, typer.Option(help='Enable trace messages')] = False
+  trace: Annotated[bool, typer.Option("--trace", "-t", help='Enable trace messages')] = False
   ):
-  print(trace)
   logger.remove(0)
-  logger.add(stderr, level='TRACE')
+  if trace:
+    logger.add(stderr, level='TRACE')
+  else:
+    logger.add(stderr, level='INFO')
+    
   logger.debug('this is debug')
   logger.trace('this is trace')
   logger.warning('this is warning')
