@@ -23,9 +23,10 @@ def loguru_init(trace, logfile:str=None):
 @app.command('spigot')
 def build_spigot(
   version: Optional[list[str]] = Argument(default=None),
-  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace-level Debugging')] = False
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace-level Debugging')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
 ):
-  loguru_init(trace)
+  loguru_init(trace, logfile)
   logger.info('building spigot')
   builders.spigotbuilder.build(build_path, version=version)
 
@@ -34,9 +35,10 @@ def build_spigot(
 @app.command('paper')
 def build_paper(
   version: Optional[list[str]] = Argument(default=None),
-  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
   ):
-  loguru_init(trace)
+  loguru_init(trace, logfile)
   logger.info('building paper')
   builders.paperbuilder.build(build_path, version=version)
 
@@ -45,9 +47,10 @@ def build_paper(
 
 @app.command('test')
 def test(
-  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
   ):
-  loguru_init(trace)
+  loguru_init(trace, logfile)
   logger.debug('this is debug')
   logger.trace('this is trace')
   logger.warning('this is warning')
