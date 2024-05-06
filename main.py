@@ -15,12 +15,8 @@ app = Typer(no_args_is_help=True, add_completion=False)
 build_path=path.join('.', 'release')
 
 
-def loguru_init(trace):
-  logger.remove(0)
-  if trace:
-    logger.add(stderr, level='TRACE')
-  else:
-    logger.add(stderr, level='INFO')
+def loguru_init(trace, logfile:str=None):
+  utils.load_logging(trace, logfile)
 
 
 
