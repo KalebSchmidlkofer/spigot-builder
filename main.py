@@ -1,4 +1,4 @@
-import typer
+from typer import Typer, Option, Argument
 from typing_extensions import Annotated
 import utils
 import builders
@@ -10,14 +10,14 @@ from loguru import logger
 
 # builders.spigotbuilder.build_spigot(build_path)
 
-app = typer.Typer(no_args_is_help=True, add_completion=False)
+app = Typer(no_args_is_help=True, add_completion=False)
 build_path=path.join('.', 'release')
 
 
 @app.command('spigot')
 def build_spigot(
-  version=None,
-  trace: Annotated[bool, typer.Option("--trace", "-t", help='Enable trace messages')] = False
+  version: list[str] = Argument(),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False
 ):
   builders.spigotbuilder.build(build_path, version=version)
 
@@ -25,14 +25,14 @@ def build_spigot(
 
 @app.command('paper')
 def build_paper(
-  version=None,
-  trace: Annotated[bool, typer.Option("--trace", "-t", help='Enable trace messages')] = False
+  version: list[str] = Argument(),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False
   ):
   builders.paperbuilder.build(build_path, version=version)
 
 @app.command('test')
 def test(
-  trace: Annotated[bool, typer.Option("--trace", "-t", help='Enable trace messages')] = False
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False
   ):
   logger.remove(0)
   if trace:
