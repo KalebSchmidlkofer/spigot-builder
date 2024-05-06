@@ -1,6 +1,5 @@
 import subprocess
 import utils
-from typing import Optional
 
 def _version_to_tuple(version_str):
   try:
@@ -15,10 +14,11 @@ def _tuple_to_version(version_tuple):
 
 
 
-def build(build_path: str, version = None):
+def build(build_path: str, version:list = None):
   
   if not version:
-    VERSIONS = [_version_to_tuple(versions) for versions in utils.get_paper_versions()]
+    version=utils.get_paper_versions()
+    VERSIONS = [_version_to_tuple(versions) for versions in version]
   else:
     VERSIONS = [_version_to_tuple(version)]
   
@@ -32,3 +32,4 @@ def build(build_path: str, version = None):
     elif x < (1,17,1):
       subprocess.run(["docker", "run", "--rm", "-v", f"{build_path}:/release:z", "-e", f"VERSION={version}", "--name", f"spigot-builder-{version}", "zastrix/spigot-builder:openjdk-8-alpine"])
 
+    #* After building, have to make an api call to the website with the file which is going to be os.path.join(build_path, f'spigot-{version}.jar')
