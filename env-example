@@ -1,0 +1,3 @@
+# Rename this file to .env and add your own values
+
+GithubToken=<A github token used to fetch some releases from github>

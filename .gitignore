@@ -3,3 +3,4 @@ release
 .venv
 *__pycache__*
 activate
+.env
