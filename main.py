@@ -42,9 +42,13 @@ def build_paper(
   logger.info('building paper')
   builders.paperbuilder.build(build_path, version=version)
 
-
-
-
+@app.command('full', help='Build all jars available in builders dir')
+def build_all(
+  version: Optional[list[str]] = Argument(default=None),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  pass
 @app.command('test')
 def test(
   trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
