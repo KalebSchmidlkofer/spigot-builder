@@ -26,8 +26,13 @@ def build_all(
   ):
   logger.info('Building paper')
   builders.paperbuilder.build(build_path, version=None)
+  builders.spigotbuilder.build(build_path, version=None)
+  builders.snapshotbuilder.build(build_path, version=None)
+  builders.vanillabuilder.build(build_path, version=None)
 
-
+@app.command('vanilla')
+def build_vanilla(version=None):
+  builders.vanillabuilder.build(build_path, version=version)
 
 @app.command('spigot')
 def build_spigot(
@@ -50,7 +55,7 @@ def build_paper(
   builders.paperbuilder.build(build_path, version=version)
 
 @app.command('snapshot')
-def build_vanilla(version=None):
+def build_snapshot(version=None):
   builders.snapshotbuilder.build(build_path, version=version)
 
 

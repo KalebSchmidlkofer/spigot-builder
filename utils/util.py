@@ -43,6 +43,8 @@ def load_logging(trace, logfile:Optional[str]=None):
 
 
 papermc_api='https://api.papermc.io/v2/projects/'
+vanilla_api='https://launchermeta.mojang.com/mc/game/version_manifest.json'
+
 
 def get_paper_versions():
   vapi=f'{papermc_api}/paper'
@@ -72,19 +74,33 @@ def get_waterfall_versions():
   versions=vdata['versions']
   return versions
 
-def get_vanilla_version():
-  vapi='https://launchermeta.mojang.com/mc/game/version_manifest.json'
+def get_vanilla_version() -> list: 
+  '''Fetches versions for both old_alpha and release'''
+  vapi=vanilla_api
   vrequest=requests.get(vapi)
   vdata=vrequest.json()
-  versions=vdata['versions']
-  releaseList=[]
-  snapshotList=[]
+  versions:list=vdata['versions']
+  re_versions:list=[]
   for x in versions:
     if x['type'] == 'release':
-      releaseList.append(x)
-    elif x['type'] == 'snapshot':
-      snapshotList.append(x)
-  return releaseList, snapshotList
+      logger.info('passing')
+      re_versions.append(x)
+    if x['type'] == 'old_alpha':
+      re_versions.append(x)
+  return re_versions
+
+def get_snapshot_version():
+  vapi=vanilla_api
+  vrequest=requests.get(vapi)
+  vdata=vrequest.json()
+  versions:list=vdata['versions']
+  re_versions:list=[]
+  for x in versions:
+    if  x['type'] == 'snapshot':
+      logger.info('passing')
+      re_versions.append(x)
+
+  return versions
 
 def get_purpur_versions():
   vapi='https://api.purpurmc.org/v2/purpur/'

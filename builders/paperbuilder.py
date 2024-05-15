@@ -4,6 +4,7 @@ from os import path, mkdir
 from loguru import logger
 from munch import munchify
 #? Not really a builder, just uses the papermc api to download the jars
+#* This file gets Papermc, Folia, Velocity, Travertine, waterfall
 paperapi='https://api.papermc.io/v2/projects/'
 
 
@@ -24,11 +25,12 @@ class getPaper:
       "download": buildversion.downloads.application.name
     }
     self.data=returndata
-    #print(self.data)
+    logger.trace(self.data)
     return self.data
 
 
   def download(self):
+    logger.trace('Downloading:')
     logger.trace(self.data["build"])
     logger.trace(self.data["download"])
     logger.trace(self.project)
