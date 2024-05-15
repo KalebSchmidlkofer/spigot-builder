@@ -1,4 +1,4 @@
 from . import spigotbuilder
-from . import paperbuilder
+from . import papermcbuilder
 from . import vanillabuilder
 from . import snapshotbuilder

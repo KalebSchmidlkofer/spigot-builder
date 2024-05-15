@@ -74,7 +74,7 @@ def get_waterfall_versions():
   versions=vdata['versions']
   return versions
 
-def get_vanilla_version() -> list: 
+def get_vanilla_versions() -> list: 
   '''Fetches versions for both old_alpha and release'''
   vapi=vanilla_api
   vrequest=requests.get(vapi)
@@ -89,7 +89,7 @@ def get_vanilla_version() -> list:
       re_versions.append(x)
   return re_versions
 
-def get_snapshot_version():
+def get_snapshot_versions():
   vapi=vanilla_api
   vrequest=requests.get(vapi)
   vdata=vrequest.json()
@@ -113,3 +113,4 @@ def get_purpur_versions():
 
 def get_bungeecord():
   vapi='https://ci.md-5.net/job/BungeeCord/lastStableBuild/artifact/bootstrap/target/BungeeCord.jar'
+

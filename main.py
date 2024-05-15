@@ -52,7 +52,7 @@ def build_paper(
   ):
   loguru_init(trace, logfile)
   logger.info('building paper')
-  builders.paperbuilder.build(build_path, version=version)
+  builders.paperbuilder.build(build_path, version=version, project='paper')
 
 @app.command('snapshot')
 def build_snapshot(version=None):
