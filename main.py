@@ -19,6 +19,15 @@ def loguru_init(trace, logfile:str=None):
   utils.load_logging(trace, logfile)
 
 
+@app.command('full', help='Build all jars available in builders dir')
+def build_all(
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  logger.info('Building paper')
+  builders.paperbuilder.build(build_path, version=None)
+
+
 
 @app.command('spigot')
 def build_spigot(
@@ -30,8 +39,6 @@ def build_spigot(
   logger.info('building spigot')
   builders.spigotbuilder.build(build_path, version=version)
 
-
-
 @app.command('paper')
 def build_paper(
   version: Optional[list[str]] = Argument(default=None),
@@ -42,13 +49,10 @@ def build_paper(
   logger.info('building paper')
   builders.paperbuilder.build(build_path, version=version)
 
-@app.command('full', help='Build all jars available in builders dir')
-def build_all(
-  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
-  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
-  ):
-  logger.info('Building paper')
-  builders.paperbuilder.build(build_path, version=None)
+@app.command('snapshot')
+def build_vanilla(version=None):
+  builders.snapshotbuilder.build(build_path, version=version)
+
 
 
 @app.command('test')
