@@ -18,6 +18,14 @@ def build_spigot(version=None):
 def build_spigot(version=None):
   builders.paperbuilder.build(build_path, version=version)
 
+@app.command('vanilla')
+def build_vanilla(version=None):
+  builders.vanillabuilder.build(build_path, version=version)
+
+@app.command('snapshot')
+def build_vanilla(version=None):
+  builders.snapshotbuilder.build(build_path, version=version)
+
 
 
 
