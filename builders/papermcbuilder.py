@@ -52,10 +52,10 @@ def build(
   
   version=utils.loadPlugin(project)  
   paper=getPaper(project)
+  regpath=path.join(f'{build_path}')
   for x in version:
     paper.fetchVersions(x)
     downloadContent=paper.download()
-    regpath=path.join(f'{build_path}')
     dlpath=path.join(regpath, paper.data['download'])
     if not path.exists(regpath): 
       mkdir(regpath)

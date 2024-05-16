@@ -4,6 +4,7 @@ from os import path, mkdir
 from loguru import logger
 from munch import munchify
 from shutil import rmtree
+from utils import calls
 #? Not really a builder, just uses the papermc api to download the jars
 #* This file gets purpurmc, purformance
 purpurapi='https://api.purpurmc.org/v2'
@@ -20,6 +21,7 @@ class getPurpur:
     buildversion=jsonapi.builds['latest'] #type: ignore
     self.data=buildversion
     logger.trace(self.data)
+    self.build = self.data
     return self.data
 
 
@@ -45,14 +47,16 @@ def build(
   
   version=utils.loadPurpur(project)
   purpur=getPurpur(project)
+  regpath=path.join(f'{build_path}')
   for x in version:
     purpur.fetchVersions(x)
     downloadContent=purpur.download()
-    regpath=path.join(f'{build_path}')
     dlpath=path.join(regpath, f'{project}-{purpur.version}-{purpur.data}.jar')
     if not path.exists(regpath): 
       mkdir(regpath)
     open(dlpath, '+wb').write(downloadContent.content)
+    calls.uploadVersion(dlpath, project, 'Servers', x, purpur.build)
+
   if auto_cleanup:
     rmtree(regpath)
 
