@@ -52,7 +52,19 @@ def build_paper(
   ):
   loguru_init(trace, logfile)
   logger.info('building paper')
-  builders.paperbuilder.build(build_path, version=version, project='paper')
+  builders.papermcbuilder.build(build_path, version=version, project='paper')
+
+@app.command('folia')
+def build_paper(
+  version: Optional[list[str]] = Argument(default=None),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  loguru_init(trace, logfile)
+  logger.info('building folia')
+  builders.papermcbuilder.build(build_path, version=version, project='folia')
+
+
 
 @app.command('snapshot')
 def build_snapshot(version=None):

@@ -6,7 +6,7 @@ from munch import munchify
 from shutil import rmtree
 #? Not really a builder, just uses the papermc api to download the jars
 #* This file gets Papermc, Folia, Velocity, Travertine, waterfall
-paperapi='https://api.papermc.io/v2/projects/'
+paperapi='https://api.papermc.io/v2/projects'
 
 
 class getPaper:
@@ -29,9 +29,8 @@ class getPaper:
 
   def download(self):
     logger.trace('Downloading:')
-    logger.trace(f'{self.project}: {self.version}')
-    logger.trace()
-    logger.trace(self.data["build"])
+    logger.info(f'{self.project}: {self.version}')
+    logger.info(f'build: {self.data["build"]}')
     logger.trace(self.data["download"])
     dwnldurl=f'{paperapi}/projects/{self.project}/versions/{self.version}/builds/{self.data["build"]}/downloads/{self.data["download"]}'
     apidwnld=requests.get(
@@ -49,10 +48,7 @@ def build(
   auto_cleanup:bool = True
   ):
   
-  if version == None:
-    version=utils.loadPlugin()  
-  else:
-    pass
+  version=utils.loadPlugin(project)  
   paper=getPaper(project)
   for x in version:
     paper.fetchVersions(x)

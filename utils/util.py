@@ -46,29 +46,8 @@ papermc_api='https://api.papermc.io/v2/projects/'
 vanilla_api='https://launchermeta.mojang.com/mc/game/version_manifest.json'
 
 
-def get_paper_versions():
-  vapi=f'{papermc_api}/paper'
-  vrequest=requests.get(vapi)
-  vdata=vrequest.json()
-  versions=vdata['versions']
-  return versions
-
-def get_folia_versions():
-  vapi=f'{papermc_api}/folia'
-  vrequest=requests.get(vapi)
-  vdata=vrequest.json()
-  versions=vdata['versions']
-  return versions
-
-def get_velocity_versions():
-  vapi=f'{papermc_api}/folia'
-  vrequest=requests.get(vapi)
-  vdata=vrequest.json()
-  versions=vdata['versions']
-  return versions
-
-def get_waterfall_versions():
-  vapi=f'{papermc_api}/folia'
+def get_papermc_versions(project:str):
+  vapi=f'{papermc_api}/{project}'
   vrequest=requests.get(vapi)
   vdata=vrequest.json()
   versions=vdata['versions']

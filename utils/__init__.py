@@ -1,7 +1,7 @@
 from .util import *
 
-def loadPlugin() -> list:
-  paperVersions  = get_paper_versions()
+def loadPlugin(project:str) -> list:
+  paperVersions  = get_papermc_versions(project=project)
   return paperVersions
 
 
