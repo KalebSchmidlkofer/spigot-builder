@@ -23,7 +23,7 @@ kinda stopped working properly.
 - [ ] CraftBukkit
 - [ ] Crucible
 - [ ] Fabric
-- [ ] Folia
+- [X] Folia
 - [ ] Forge
 - [ ] Glowstone
 - [ ] Java
@@ -33,8 +33,8 @@ kinda stopped working properly.
 - [ ] Quilt
 - [ ] SpongeForge
 - [ ] SpongeVanilla
-- [ ] Travertine
+- [X] Travertine
 - [ ] Tuinity
-- [ ] Velocity
-- [ ] Waterfall
+- [X] Velocity
+- [X] Waterfall
 - [ ] Bungeecord
