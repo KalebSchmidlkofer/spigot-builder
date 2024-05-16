@@ -55,7 +55,7 @@ def build_paper(
   builders.papermcbuilder.build(build_path, version=version, project='paper')
 
 @app.command('folia')
-def build_paper(
+def build_folia(
   version: Optional[list[str]] = Argument(default=None),
   trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
   logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
@@ -63,6 +63,41 @@ def build_paper(
   loguru_init(trace, logfile)
   logger.info('building folia')
   builders.papermcbuilder.build(build_path, version=version, project='folia')
+
+@app.command('waterfall')
+def build_waterfall(
+  version: Optional[list[str]] = Argument(default=None),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  loguru_init(trace, logfile)
+  logger.info('building waterfall')
+  builders.papermcbuilder.build(build_path, version=version, project='waterfall')
+
+
+@app.command('travertine')
+def build_travertine(
+  version: Optional[list[str]] = Argument(default=None),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  loguru_init(trace, logfile)
+  logger.info('building travertine')
+  builders.papermcbuilder.build(build_path, version=version, project='travertine')
+
+@app.command('velocity')
+def build_velocity(
+  version: Optional[list[str]] = Argument(default=None),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  loguru_init(trace, logfile)
+  logger.info('building velocity')
+  builders.papermcbuilder.build(build_path, version=version, project='velocity')
+
+
+
+
 
 
 
