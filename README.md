@@ -29,7 +29,7 @@ kinda stopped working properly.
 - [ ] Java
 - [ ] Magma
 - [ ] Mohist([Not adding unless situation changes](https://essentialsx.net/do-not-use-mohist.html))
-- [ ] Purpur
+- [X] Purpur
 - [ ] Quilt
 - [ ] SpongeForge
 - [ ] SpongeVanilla
@@ -38,3 +38,4 @@ kinda stopped working properly.
 - [X] Velocity
 - [X] Waterfall
 - [ ] Bungeecord
+- [X] Purformance

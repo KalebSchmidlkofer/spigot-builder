@@ -81,12 +81,10 @@ def get_snapshot_versions():
 
   return versions
 
-def get_purpur_versions():
-  vapi='https://api.purpurmc.org/v2/purpur/'
+def get_purpur_versions(project:str) -> list:
+  vapi=f'https://api.purpurmc.org/v2/{project}/'
   vrequest=requests.get(vapi)
   vdata=vrequest.json()
-  if not vdata['project'] == 'purpur':
-    raise ValueError
   versions=vdata['versions']
   return versions
 

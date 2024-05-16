@@ -9,8 +9,6 @@ from typing import Optional
 
 
 
-# builders.spigotbuilder.build_spigot(build_path)
-
 app = Typer(no_args_is_help=True, add_completion=False)
 build_path=path.join('.', 'release')
 
@@ -25,14 +23,29 @@ def build_all(
   logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
   ):
   logger.info('Building paper')
-  builders.paperbuilder.build(build_path, version=None)
-  builders.spigotbuilder.build(build_path, version=None)
-  builders.snapshotbuilder.build(build_path, version=None)
-  builders.vanillabuilder.build(build_path, version=None)
+  build_vanilla(trace=trace)
+  build_snapshot(trace=trace)
+  build_paper(trace=trace)
+  build_folia(trace=trace)
+  build_waterfall(trace=trace)
+  build_travertine(trace=trace)
+  build_velocity(trace=trace)
+  build_spigot(trace=trace) #? Once again, is this legal?
 
 @app.command('vanilla')
-def build_vanilla(version=None):
+def build_vanilla(
+  version=None,
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  ):
   builders.vanillabuilder.build(build_path, version=version)
+
+@app.command('snapshot')
+def build_snapshot(
+  version=None,
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+):
+  builders.snapshotbuilder.build(build_path, version=version)
+
 
 @app.command('spigot')
 def build_spigot(
@@ -95,15 +108,25 @@ def build_velocity(
   logger.info('building velocity')
   builders.papermcbuilder.build(build_path, version=version, project='velocity')
 
+@app.command('purpur')
+def build_purpur(
+  version: Optional[list[str]] = Argument(default=None),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  loguru_init(trace, logfile)
+  logger.info('building purpur')
+  builders.purpurmcbuilder.build(build_path, version=version, project='purpur')
 
-
-
-
-
-
-@app.command('snapshot')
-def build_snapshot(version=None):
-  builders.snapshotbuilder.build(build_path, version=version)
+@app.command('purformance')
+def build_purformance(
+  version: Optional[list[str]] = Argument(default=None),
+  trace: Annotated[bool, Option("--trace", "-t", help='Enable trace messages')] = False,
+  logfile: Annotated[str, Option("--log-file", "-lf", help="What file to output log messages to")] = None
+  ):
+  loguru_init(trace, logfile)
+  logger.info('building purformance')
+  builders.purpurmcbuilder.build(build_path, version=version, project='purformance')
 
 
 
