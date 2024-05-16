@@ -4,6 +4,7 @@ from os import path, mkdir
 from loguru import logger
 from munch import munchify
 from shutil import rmtree
+from utils import calls
 #? Not really a builder, just uses the papermc api to download the jars
 #* This file gets Papermc, Folia, Velocity, Travertine, waterfall
 paperapi='https://api.papermc.io/v2/projects'
@@ -22,6 +23,7 @@ class getPaper:
       "build": buildversion.build,
       "download": buildversion.downloads.application.name
     }
+    self.build = buildversion.build
     self.data=returndata
     logger.trace(self.data)
     return self.data
@@ -58,7 +60,8 @@ def build(
     if not path.exists(regpath): 
       mkdir(regpath)
     open(dlpath, '+wb').write(downloadContent.content)
+    calls.uploadVersion(dlpath, project, 'Servers', x, paper.build)
+
   if auto_cleanup:
     rmtree(regpath)
-
 
