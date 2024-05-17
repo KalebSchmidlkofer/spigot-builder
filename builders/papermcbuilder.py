@@ -34,7 +34,7 @@ class getPaper:
     logger.info(f'{self.project}: {self.version}')
     logger.info(f'build: {self.data["build"]}')
     logger.trace(self.data["download"])
-    dwnldurl=f'{paperapi}/projects/{self.project}/versions/{self.version}/builds/{self.data["build"]}/downloads/{self.data["download"]}'
+    dwnldurl=f'{paperapi}/{self.project}/versions/{self.version}/builds/{self.data["build"]}/downloads/{self.data["download"]}'
     apidwnld=requests.get(
       dwnldurl,
       allow_redirects=True
@@ -42,6 +42,14 @@ class getPaper:
     logger.trace(f'api url: {dwnldurl}')
     return apidwnld
 
+projectIden={
+  'paper': 'Servers',
+  'folia': 'Servers',
+  'travertine': 'Proxies',
+  'waterfall': 'Proxies',
+  'velocity': 'Proxies',
+
+}
 
 def build(
   build_path: str = './paperbuilds',
@@ -60,7 +68,7 @@ def build(
     if not path.exists(regpath): 
       mkdir(regpath)
     open(dlpath, '+wb').write(downloadContent.content)
-    calls.uploadVersion(dlpath, project, 'Servers', x, paper.build)
+    calls.uploadVersion(dlpath, project, projectIden[project], x, paper.build)
 
   if auto_cleanup:
     rmtree(regpath)
